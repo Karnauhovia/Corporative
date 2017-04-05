@@ -15,11 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/person")
@@ -40,10 +38,8 @@ public class PersonController {
        public void addPerson(@RequestBody String person) {
         Gson gson = new Gson();
         Person personObj = gson.fromJson(person, Person.class);
-
         personObj.setCash_back_uah(personObj.getAnother()+personObj.getDinners() +personObj.getTaxes());
         personObj.setCash_back_usd(personObj.getOvertimes()+personObj.getBonus());
-
         personRepository.saveAndFlush(personObj);
 
     }
@@ -54,10 +50,8 @@ public class PersonController {
     public void updatePerson(@RequestBody String person) {
         Gson gson = new Gson();
         Person personObj = gson.fromJson(person, Person.class);
-
         personObj.setCash_back_uah(personObj.getAnother()+personObj.getDinners() +personObj.getTaxes());
         personObj.setCash_back_usd(personObj.getOvertimes()+personObj.getBonus());
-
         personRepository.saveAndFlush(personObj);
 
     }
@@ -117,10 +111,7 @@ public class PersonController {
     public void readXLSFile(@PathVariable("filePath") String filePath) throws IOException {
 
         String file = filePath.toString();
-        //String file2 = file.replace("C:\\fakepath","C:\\Users\\Igor\\Downloads");
         String file2 = "C:\\Users\\Igor\\Downloads\\"+file;
-
-
         String parserObj = Parser.parse(file2);
 
         List<Transfers> listT = superParser(parserObj);
@@ -153,28 +144,15 @@ public class PersonController {
     public void readXLSXDebtFile(@PathVariable("filePath") String filePath) throws IOException {
 
         String file = filePath.toString();
-        //String file2 = file.replace("C:\\fakepath","C:\\Users\\Igor\\Downloads");
         String file2 = "C:\\Users\\Igor\\Downloads\\"+file;
-
-
         String parserObj = Parser.parse(file2);
-
         List<Transfers> listT = superParserForDebt(parserObj);
 
         for(int i=0;i<listT.size();i++) {
 
             Gson gson = new Gson();
-            //Person personobj = gson.fromJson(String.valueOf(listT.get(i)), Person.class);
             Transfers transfers = gson.fromJson(String.valueOf(listT.get(i)), Transfers.class);
-
             Person personById = personRepository.findOne(transfers.getCash_id());
-//            transfers.setCash_another(personById.getAnother());
-//            transfers.setCash_bonus(personById.getBonus());
-//            transfers.setCash_dinners(personById.getDinners());
-//            transfers.setCash_overtimes(personById.getOvertimes());
-//            transfers.setCash_taxes(personById.getTaxes());
-//            transfers.setCash_salary(personById.getRate());
-
             personById.setCount(listT.get(i).getCash_balance());
             transfers.setPerson(personById);
 
@@ -185,14 +163,30 @@ public class PersonController {
     }
 
     private List<Transfers> superParserForDebt(String parserObj) {
-        String Obj = parserObj.replaceAll("UAH", "").replaceAll("USD", "").replaceAll("\\.00", "");
+        String Obj = parserObj.replaceAll("UAH", "").replaceAll("USD", "").replaceAll("\\.00", "").replaceAll("[ ]{3,}", "");
 
         String[] arrLine = Obj.split(" \n");
         List<Transfers> list = new ArrayList<>();
+        int counter = 0;
+        String line = null;
+        List<String> listLineDebt = new ArrayList<>();
 
         for (int i = 1; i < arrLine.length; i++) {
 
-            String[] PersonArr = arrLine[i].trim().replaceAll("[\\s]{2,}", " ").replaceAll(",","").split(" ");
+            if (counter == 0) {
+
+                line = arrLine[i];
+                counter = 1;
+            } else {
+                line = line.concat(arrLine[i]);
+                listLineDebt.add(line);
+                counter = 0;
+            }
+        }
+
+        for (String y : listLineDebt) {
+
+            String[] PersonArr = y.trim().replaceAll("[\\s]{2,}", " ").replaceAll(",","").split(" ");
 
             Transfers transfers = new Transfers();
             Person person = new Person();
@@ -202,24 +196,15 @@ public class PersonController {
             Float cours = Float.parseFloat(PersonArr[PersonArr.length-2]);
             Float pay = Float.parseFloat(PersonArr[PersonArr.length-1])/cours;
 
-
-            //float rate = Float.parseFloat(PersonArr[PersonArr.length-1])/cours;
-
             Date today = new Date();
             String todayDay = DateFormat.getDateInstance().format(today);
 
             person.setId(id);
-            //float c = Float.parseFloat(PersonArr[PersonArr.length-4])-(Float.parseFloat(PersonArr[PersonArr.length-1])/cours);
             Float count = Float.parseFloat(PersonArr[PersonArr.length-3]);
             if (count<0.02){count= Float.valueOf(0);}
             person.setCount(count);
-
             float balance = count-pay;
-
             if (balance<0.02){balance=0;}
-
-            //float c = Float.parseFloat(PersonArr[PersonArr.length-4])-(Float.parseFloat(PersonArr[PersonArr.length-1])/cours);
-            //person.setCount((float) (Math.round(c * Math.pow(10, 2)) / Math.pow(10, 2)));
 
             transfers.setCash_pay(pay);
             transfers.setPay_date(todayDay);
@@ -232,22 +217,37 @@ public class PersonController {
             list.add(transfers);
 
         }
-
         return list;
 
     }
 
     private static List<Transfers> superParser(String parserObj) {
 
-        String Obj = parserObj.replaceAll("UAH", "").replaceAll("USD", "").replaceAll("\\.00", "");
-//        String Obj = parserObj.replaceAll("UAH", "").replaceAll("USD", "");
-//        String Obj2 = Obj.replaceAll("\\.0", "");
+        String Obj = parserObj.replaceAll("UAH", "").replaceAll("USD", "").replaceAll("\\.00", "").replaceAll("[ ]{3,}", "");
+
         String[] arrLine = Obj.split(" \n");
         List<Transfers> list = new ArrayList<>();
+        int counter = 0;
+        String line = null;
+        List<String> listLine = new ArrayList<>();
 
         for (int i = 1; i < arrLine.length; i++) {
 
-            String[] PersonArr = arrLine[i].trim().replaceAll("[\\s]{2,}", " ").replaceAll(",","").split(" ");
+            if (counter == 0) {
+
+                line = arrLine[i];
+                counter = 1;
+            } else {
+                line = line.concat(arrLine[i]);
+                listLine.add(line);
+                counter = 0;
+            }
+        }
+
+        for (String x : listLine) {
+
+
+            String[] PersonArr = x.trim().replaceAll("\\s+", " ").replaceAll(",", "").split(" ");
 
             Transfers transfers = new Transfers();
             Person person = new Person();
@@ -256,7 +256,6 @@ public class PersonController {
 
             float cours = Float.parseFloat(PersonArr[PersonArr.length-2])/Float.parseFloat(PersonArr[PersonArr.length-4]);
             float rate = Float.parseFloat(PersonArr[PersonArr.length-1])/cours;
-
 
             Date today = new Date();
             String todayDay = DateFormat.getDateInstance().format(today);
@@ -268,8 +267,6 @@ public class PersonController {
             if(rest<0.02){rest=0;}
             person.setCount(rest);
 
-            //person.setCount(Float.parseFloat(PersonArr[PersonArr.length-4])-(Float.parseFloat(PersonArr[PersonArr.length-1])/cours));
-
             transfers.setCash_pay(rate);
             transfers.setPay_date(todayDay);
             transfers.setCash_id(id);
@@ -279,12 +276,8 @@ public class PersonController {
 
             list.add(transfers);
 
-
         }
-
         return list;
-
     }
-
 
 }

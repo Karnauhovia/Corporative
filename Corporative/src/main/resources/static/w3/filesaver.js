@@ -13,10 +13,10 @@
 /*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
 
 var saveAs = saveAs
-    // IE 10+ (native saveAs)
+        // IE 10+ (native saveAs)
     || (typeof navigator !== "undefined" &&
     navigator.msSaveOrOpenBlob && navigator.msSaveOrOpenBlob.bind(navigator))
-    // Everyone else
+        // Everyone else
     || (function(view) {
         "use strict";
         // IE <10 is explicitly unsupported

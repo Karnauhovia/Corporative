@@ -11,12 +11,11 @@
 <link rel="stylesheet" href="w3/w3-theme-teal.css"/>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" href="w3/tableexport.css"/>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
-<!--<link rel="stylesheet" href="https://cdn.rawgit.com/esvit/ng-table/v1.0.0/dist/ng-table.min.css"/>-->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 
 <nav class="navbar navbar-inverse">
@@ -374,156 +373,21 @@
     </div>
 </div>
 
-<!--Input Modal -->
-<div ng-controller="customersCtrl" id="id04" class="w3-modal2">
-    <div class="w3-modal2-content w3-card-8 w3-animate-top">
 
-        <header class="w3-container w3-theme-l1">
-            <span onclick="document.getElementById('id04').style.display='none'" class="w3-closebtn">×</span>
-            <h4>Input File .xls</h4>
-        </header>
-        <div ng-controller="customersCtrl">
-            <div class="w3-row-padding">
-                <form class="w3-container w3-card-4">
-                    <div class="w3-group w3-half">
-                        <br/>
-                        <input type="file" name="file" accept="xlsx" id="idfile" value="Обзор" />
-                        <br/>
-                        <button type="reset" onclick="InputFile()">Input Excel File</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
+<script src="w3/xlsx.core.js"></script>
+<script src="w3/Blob.js"></script>
+<script src ="w3/jquery-3.1.1.js"></script>
+<script src="w3/FileSaver.js"></script>
+<script src="w3/tableexport.js"></script>
+<script src="w3/script1.js"></script>
 
 <script>
 
-    var InputFile = function () {
-        var file = $("#idfile").val().replace("C:\\fakepath\\","");
+    var TransactionExport = function () {
 
-        $.ajax({
-            method: 'GET',
-            type: 'GET',
-            url: '/person/input/'+file+'.xlsx',
-            data: {
-                file
-            },
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        document.getElementById('id04').style.display = 'none';
-        //location.reload();
-    }
-
-    var Refresh = function () {
-        location.reload();
-    }
-
-    var RestCash = function () {
-        var JSONObject1 = {
-            "cash_id": $("#cash_id").val()
-            , "pay_date": $("#pay_date").val().toString()
-            , "cash_pay": $("#cash_pay").val()
-            , "count": $("#cash_count").val()
-            , "cash_course": $("#cash_course").val()
-        };
-
-        $.ajax({
-            method: 'POST',
-            type: 'POST',
-            url: '/transfers/put/',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(JSONObject1),
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        location.reload();
-    }
-
-    var RestUpdate = function () {
-
-        var JSONObject = {
-            "id": $("#upId").val()
-            , "name": $("#upName").val()
-            , "name2": $("#upName2").val()
-            , "name3": $("#upName3").val()
-            , "department": $("#upDepartment").val()
-            , "position": $("#upPosition").val()
-            , "cash_date": $("#upCash_date").val().toString()
-            , "date_recruit": $("#upDate_recruit").val().toString()
-            , "comments": $("#upComments").val()
-            , "rate": $("#upRate").val()
-            , "count": $("#upCount").val().replace(",",".")
-            , "dinners": $("#upDinners").val()
-            , "taxes": $("#upTaxes").val()
-            , "overtimes": $("#upOvertimes").val()
-            , "bonus": $("#upBonus").val()
-            , "another": $("#upAnother").val()
-            , "shows": "0"
-        };
-
-
-        $.ajax({
-            method: 'POST',
-            type: 'POST',
-            url: '/person/update/' ,
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(JSONObject),
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        document.getElementById('id02').style.display = 'none';
-        location.reload();
-    }
-
-    var RestPut  = function () {
-        var JSONObject = {
-            "name": $("#name").val()
-            , "name2": $("#2name").val()
-            , "name3": $("#3name").val()
-            , "department": $("#department").val()
-            , "position": $("#position").val()
-            , "cash_date": $("#pweek").val().toString()
-            , "date_recruit": $("#date_recruit").val().toString()
-            , "comments": $("#comment").val()
-            , "dinners": $("#dinners").val()
-            , "taxes": $("#taxes").val()
-            , "overtimes": $("#overtimes").val()
-            , "bonus": $("#bonus").val()
-            , "another": $("#another").val()
-            , "rate": $("#rate").val()
-            , "shows": "0"
-
-        };
-
-        //var e = Base64.encode(JSON.stringify(JSONObject));
-
-        $.ajax({
-            method: 'POST',
-            type: 'POST',
-            url: '/person/put/',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(JSONObject),
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        document.getElementById('id01').style.display = 'none';
-        location.reload();
+        $("table").tableExport({fileName:"Transactions Person Information"});
+        $(".xlsx").click();
+        $(".xlsx").remove();
     }
 
 </script>
@@ -532,13 +396,9 @@
 <div ng-app="myApp">
     <div class="w3-container">
         <div ng-controller="customersCtrl">
-            <!--$<input type="number" ng-model="ua" ng-init="ua=" width="10px" value=""/>-->
-            <a id="dlink" style="display:none;"></a>
-            <a download="TransfersData.xls" href="#"
-               onclick="return ExcellentExport.excel(this, 'transfersTable', 'transfersTable');">
-                <button>Export to Excel</button>
-            </a>
-            <!--<button type="reset" onclick="document.getElementById('id04').style.display='block'">Input Excel File</button>-->
+
+            <button type="reset" onclick="TransactionExport()" class="btn btn-default xls">Export Transaction List to xlsx</button>
+
             <div class="w3-center">
                 <label>Salary transactions</label>
             </div>
@@ -600,10 +460,10 @@
             </div>
         </div>
 
-        <script src="w3/excellentexport.js"></script>
+
         <script>
             $(document).ready(function () {
-                $('[data-toggle="tooltip"]').tooltip;
+                $('[data-toggle="tooltip"]');
             });
         </script>
 
@@ -671,34 +531,5 @@
     </div>
     </p>
 </footer>
-
-
-<!--<script>-->
-    <!--// Slideshows-->
-    <!--var slideIndex = 1;-->
-
-    <!--function plusDivs(n) {-->
-        <!--slideIndex = slideIndex + n;-->
-        <!--showDivs(slideIndex);-->
-    <!--}-->
-
-    <!--function showDivs(n) {-->
-        <!--var x = document.getElementsByClassName("mySlides");-->
-        <!--if (n > x.length) {-->
-            <!--slideIndex = 1-->
-        <!--}-->
-        <!--if (n < 1) {-->
-            <!--slideIndex = x.length-->
-        <!--}-->
-        <!--;-->
-        <!--for (i = 0; i < x.length; i++) {-->
-            <!--x[i].style.display = "none";-->
-        <!--}-->
-
-    <!--}-->
-
-    <!--showDivs(1);-->
-
-<!--</script>-->
 </body>
 </html>

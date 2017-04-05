@@ -12,21 +12,22 @@
 <link rel="stylesheet" href="w3/w3-theme-teal.css"/>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-<!--<script src='https://javascriptbase64.googlecode.com/files/base64.js' type='text/javascript'></script> -->
+<link rel="stylesheet" href="w3/tableexport.css"/>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.js"></script>
 
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand w3-theme" href="index"><span class="glyphicon glyphicon-home"></span>To main</a>
-        </div>\
+        </div>
+        \
         <div class="navbar-header">
             <a class="navbar-brand" href="index2"><span class="glyphicon glyphicon-list-alt"></span>Transactions</a>
-        </div>\
+        </div>
+        \
         <div class="navbar-header">
             <a class="navbar-brand" href="index4"><span class="glyphicon glyphicon-list-alt"></span>Debtors</a>
         </div>
@@ -47,9 +48,11 @@
             <!--<li ><a href="/login" onclick="OutFunc()"><span class="glyphicon glyphicon-log-out"></span> Log OUT</a></li>-->
 
             <li>
-            <form th:action="@{/logout}" method="post">
-                <button type="submit" class="btn btn-danger btn-block" ><span lass="glyphicon glyphicon-log-out"></span> Log out</button>
-            </form>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-danger btn-block"><span
+                            lass="glyphicon glyphicon-log-out"></span> Log out
+                    </button>
+                </form>
             </li>
 
         </ul>
@@ -73,16 +76,16 @@
                 <form class="w3-container w3-card-4">
                     <div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input" type="text" id="2name" />
+                            <input class="w3-input" type="text" id="2name"/>
                             <label class="w3-label">Second name</label>
                         </div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input" type="text" id="name" />
+                            <input class="w3-input" type="text" id="name"/>
                             <label class="w3-label">Name</label>
                         </div>
                     </div>
                     <div class="w3-group">
-                        <input class="w3-input" type="text" id="3name" />
+                        <input class="w3-input" type="text" id="3name"/>
                         <label class="w3-label">Third Name</label>
                     </div>
                     <div class="w3-half">
@@ -211,16 +214,16 @@
                     </div>
                     <div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input" type="text" id="upName" />
+                            <input class="w3-input" type="text" id="upName"/>
                             <label class="w3-label">Name</label>
                         </div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input" type="text" id="upName2" />
+                            <input class="w3-input" type="text" id="upName2"/>
                             <label class="w3-label">Second name</label>
                         </div>
                     </div>
                     <div class="w3-group">
-                        <input class="w3-input" type="text" id="upName3" />
+                        <input class="w3-input" type="text" id="upName3"/>
                         <label class="w3-label">Third Name</label><br/>
                     </div>
                     <div class="w3-half">
@@ -266,7 +269,7 @@
                         <label class="w3-label">Position</label>
                     </div>
                     <div class="w3-half">
-                        <input class="w3-input" type="text" id="upDate_recruit" />
+                        <input class="w3-input" type="text" id="upDate_recruit"/>
                         <label class="w3-label">Date Recruit</label>
                     </div>
                     <div class="w3-half">
@@ -292,19 +295,22 @@
                             <label class="w3-label">CASH BACK </label>
                         </div>
                         <div class="w3-half">
-                            Dinners UAH<input class="w3-input w3-border" type="number" id="upDinners"  placeholder="Dinners"/>
+                            Dinners UAH<input class="w3-input w3-border" type="number" id="upDinners"
+                                              placeholder="Dinners"/>
                         </div>
                         <div class="w3-half">
                             Taxes UAH<input class="w3-input w3-border" type="number" id="upTaxes" placeholder="Taxes"/>
                         </div>
                         <div class="w3-half">
-                            Overtimes USD<input class="w3-input w3-border" type="number" id="upOvertimes" placeholder="Overtimes"/>
+                            Overtimes USD<input class="w3-input w3-border" type="number" id="upOvertimes"
+                                                placeholder="Overtimes"/>
                         </div>
                         <div class="w3-half">
                             Bonus USD<input class="w3-input w3-border" type="number" id="upBonus" placeholder="Bonus"/>
                         </div>
                         <div class="w3-half">
-                            Another UAH<input class="w3-input w3-border" type="number" id="upAnother" placeholder="Another"/>
+                            Another UAH<input class="w3-input w3-border" type="number" id="upAnother"
+                                              placeholder="Another"/>
                         </div>
                         <!--<label class="w3-label">Cash back $</label>-->
                         <!--<input class="form-control" id="cashback" type="number" value="0">-->
@@ -342,7 +348,7 @@
                 <form class="w3-container w3-card-4">
                     <div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input w3-border w3-round" type="number" id="cash_id" min="1" />
+                            <input class="w3-input w3-border w3-round" type="number" id="cash_id" min="1"/>
                             <label class="w3-label">id</label>
                         </div>
                         <div class="w3-half"><br/>
@@ -352,17 +358,17 @@
                     </div>
                     <div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input w3-border w3-round" type="number" id="cash_pay" min="1" />
+                            <input class="w3-input w3-border w3-round" type="number" id="cash_pay" min="1"/>
                             <label class="w3-label">Pay</label>
                         </div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input w3-border w3-round" type="number" id="cash_count"  value="0" />
+                            <input class="w3-input w3-border w3-round" type="number" id="cash_count" value="0"/>
                             <label class="w3-label">Balance</label>
                         </div>
                     </div>
                     <div>
                         <div class="w3-half"><br/>
-                            <input class="w3-input w3-border w3-round" type="number" id="cash_course" min="1" />
+                            <input class="w3-input w3-border w3-round" type="number" id="cash_course" min="1"/>
                             <label class="w3-label">Course $</label>
                         </div>
                     </div>
@@ -390,9 +396,9 @@
                 <form class="w3-container w3-card-4">
                     <div class="w3-group w3-half">
                         <br/>
-                        <input type="file" name="file" accept="xlsx" id="idfile" value="Обзор" />
+                        <input type="file" name="file" accept="xlsx" id="idfile" value="Обзор"/>
                         <br/>
-                        <button type="submit" onclick="InputFile()" th:href="index2" >Input Excel File</button>
+                        <button type="submit" onclick="InputFile()" th:href="index2">Input Excel File</button>
                     </div>
                 </form>
             </div>
@@ -400,176 +406,35 @@
     </div>
 </div>
 
-<script src="w3/jquery-3.1.0.min.js"></script>
-<script src="w3/tableexport-2.1.js"></script>
-<script src="w3/filesaver.js"></script>
-
+<script src="w3/xlsx.core.js"></script>
+<script src="w3/Blob.js"></script>
+<script src="w3/jquery-3.1.1.js"></script>
+<script src="w3/FileSaver.js"></script>
+<script src="w3/tableexport.js"></script>
+<script src="w3/script1.js"></script>
 <script>
-
-    var InputFile = function () {
-        var file = $("#idfile").val().replace("C:\\fakepath\\","");
-
-        $.ajax({
-            method: 'GET',
-            type: 'GET',
-            url: '/person/input/'+file+'.xlsx',
-            data: {
-                file
-            },
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        document.getElementById('id04').style.display = 'none';
-        //location.reload();
-    }
-
-    var Refresh = function () {
-
-        location.reload();
-
-    }
-
-    var RestCash = function () {
-        var JSONObject1 = {
-            "cash_id": $("#cash_id").val()
-            , "pay_date": $("#pay_date").val().toString()
-            , "cash_pay": $("#cash_pay").val()
-            , "count": $("#cash_count").val()
-            , "cash_course": $("#cash_course").val()
-        };
-
-        $.ajax({
-            method: 'POST',
-            type: 'POST',
-            url: '/transfers/put/',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(JSONObject1),
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        location.reload();
-    }
-
-    var RestUpdate = function () {
-
-        var JSONObject = {
-            "id": $("#upId").val()
-            , "name": $("#upName").val()
-            , "name2": $("#upName2").val()
-            , "name3": $("#upName3").val()
-            , "department": $("#upDepartment").val()
-            , "position": $("#upPosition").val()
-            , "cash_date": $("#upCash_date").val().toString()
-            , "date_recruit": $("#upDate_recruit").val().toString()
-            , "comments": $("#upComments").val()
-            , "rate": $("#upRate").val()
-            , "count": $("#upCount").val().replace(",",".")
-            , "dinners": $("#upDinners").val()
-            , "taxes": $("#upTaxes").val()
-            , "overtimes": $("#upOvertimes").val()
-            , "bonus": $("#upBonus").val()
-            , "another": $("#upAnother").val()
-            , "shows": "0"
-        };
-
-
-        $.ajax({
-            method: 'POST',
-            type: 'POST',
-            url: '/person/update/' ,
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(JSONObject),
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        document.getElementById('id02').style.display = 'none';
-        location.reload();
-    }
-
     var RestExport = function () {
 
-        $("mainTable").tableExport() ;
+    $("table").tableExport({fileName:"Salary Person Information"});
+    $(".xlsx").click();
+    $(".xlsx").remove();
 
-    }
+    //tableExport();
 
-    var RestPut  = function () {
-        var JSONObject = {
-            "name": $("#name").val()
-            , "name2": $("#2name").val()
-            , "name3": $("#3name").val()
-            , "department": $("#department").val()
-            , "position": $("#position").val()
-            , "cash_date": $("#pweek").val().toString()
-            , "date_recruit": $("#date_recruit").val().toString()
-            , "comments": $("#comment").val()
-            , "dinners": $("#dinners").val()
-            , "taxes": $("#taxes").val()
-            , "overtimes": $("#overtimes").val()
-            , "bonus": $("#bonus").val()
-            , "another": $("#another").val()
-            , "rate": $("#rate").val()
-            , "shows": "0"
-
-        };
-
-        //var e = Base64.encode(JSON.stringify(JSONObject));
-
-        $.ajax({
-            method: 'POST',
-            type: 'POST',
-            url: '/person/put/',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(JSONObject),
-            dataType: 'json',
-            async: true,
-            success: function (result) {
-                alert('success!');
-            }
-        });
-        document.getElementById('id01').style.display = 'none';
-        location.reload();
-    }
-
-    var ChangeCourse  = function () {
-        var JSONObject = {
-            "id": '1'
-            ,"exchange_course": $("#exchange_course").val()
-        };
-
-        $.ajax({
-            method: 'POST',
-            type: 'POST',
-            url: '/person/course//set/',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(JSONObject),
-            dataType: 'json',
-            async: true
-        });
-
-        location.reload();
-    }
-
-</script>
-
+}</script>
 <!-- Content -->
 <div ng-app="myApp">
     <div class="w3-container">
 
         <button type="reset" onclick="ChangeCourse()">$</button>
 
-        <input type="number" ng-model="ua" id="exchange_course" width="10px" value="" />
+        <input type="number" ng-model="ua" id="exchange_course" width="10px" value=""/>
 
-        <a download="SalaryPersonsInformation.xls" href="#" onclick="return ExcellentExport.excel(this, 'mainTable', 'MainTable');"><button>Export to Excel</button></a>
+        <button type="reset" onclick="RestExport()" class="btn btn-default xls">Export Salary List to xlsx</button>
 
-        <button type="reset" onclick="document.getElementById('id04').style.display='block'">Input Salary List</button>
+        <button type="reset" onclick="document.getElementById('id04').style.display='block'"
+                class="btn btn-default xls">Input Salary List from xlsx
+        </button>
 
 
         <div class="w3-center">
@@ -578,12 +443,12 @@
 
         <div ng-controller="customersCtrl">
             <div class="w3-responsive w3-card-4">
-                <table class="w3-table \-6u(wide) w3-striped w3-bordered w3-display-right" id="table" >
+                <table class="w3-table \-6u(wide) w3-striped w3-bordered w3-display-right" id="table">
                     <thead>
                     <tr>
-                        <td width="75" ><input class="w3-input w3-border w3-round" size="4" ng-model="f.id"/></td>
-                        <td width="10%" ><input class="w3-input w3-border w3-round" ng-model="f.name"/></td>
-                        <td width="75" ><select class="form-control" ng-model="f.department">
+                        <td width="75"><input class="w3-input w3-border w3-round" size="4" ng-model="f.id"/></td>
+                        <td width="10%"><input class="w3-input w3-border w3-round" ng-model="f.name"/></td>
+                        <td width="75"><select class="form-control" ng-model="f.department">
                             <option></option>
                             <option>.NET</option>
                             <option>ACCOUNTANT</option>
@@ -596,7 +461,7 @@
                             <option>IOS</option>
                             <option>JAVA</option>
                             <option>JAVA SCRIPT</option>
-                            <option>CONTENT WRITER </option>
+                            <option>CONTENT WRITER</option>
                             <option>NODE JS</option>
                             <option>OFFICE MANAGER</option>
                             <option>PHP</option>
@@ -626,15 +491,15 @@
                             <option>15</option>
                             <option>25</option>
                         </select></td>
-                        <td width="75"> </td>
+                        <td width="75"></td>
                         <td><input class="w3-input w3-border w3-round" size="6" ng-model="f.cash_back"/></td>
                         <td><input class="w3-input w3-border w3-round" size="5" ng-model="f.rate"/></td>
                         <td><input class="w3-input w3-border w3-round" size="4" ng-model="f.count"/></td>
-                        <td> </td>
-                        <td> </td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     </thead>
-                    <tbody id="mainTable" class="noExl">
+                    <tbody id="mainTable">
                     <tr class="w3-theme">
                         <th>id</th>
                         <th>Full Name</th>
@@ -652,7 +517,7 @@
 
                         <th>Edit</th>
                         <th>Delete</th>
-                    </tr >
+                    </tr>
                     <tr ng-repeat="x in names | orderBy :'id' |  filter:f">
                         <td>{{ x.id }}</td>
                         <td>{{ x.name2}} {{ x.name}} {{ x.name3}}</td>
@@ -661,7 +526,7 @@
                         <td>{{ x.date_recruit}}</td>
                         <td>{{x.cash_date}}</td>
                         <td>
-                            <a href="#" ng-show="showMe(x.comments)" data-toggle="tooltip" title="{{x.comments}}" >
+                            <a href="#" ng-show="showMe(x.comments)" data-toggle="tooltip" title="{{x.comments}}">
                                 <span class="glyphicon glyphicon-comment" ng-click="comFunction(x.comments)"></span>
                             </a>
                         </td>
@@ -683,17 +548,11 @@
             </div>
         </div>
 
-        <script src="w3/excellentexport.js"></script>
-
         <script>
 
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]');
             });
-        </script>
-
-        <script>
-
 
             var app = angular.module('myApp', []);
             app.factory('Excel',function($window){
@@ -723,16 +582,9 @@
                 $http.get("/person/")
                         .then(function (response) {
                             $scope.names = response.data;
-
+                            $scope.ua = xhr.responseText;
                         });
 
-
-//                $scope.GetExchangeCourse = function () {
-//                    $http.get("/person/course/get/").then(function (respCourse) {
-//                        $scope.expCourse = respCourse.data;
-//                        document.getElementById("exchange_course").value = expCourse.cash_course;
-//                    });
-//                }
 
                 $scope.DeleteFunction = function (id) {
                     $http.get("/person/delete/" + id);
@@ -781,6 +633,8 @@
             });
 
         </script>
+
+
         <hr/>
     </div>
 </div>
@@ -796,7 +650,5 @@
     </div>
     </p>
 </footer>
-
-
 </body>
 </html>

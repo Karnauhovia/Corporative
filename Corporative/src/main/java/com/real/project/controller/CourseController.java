@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
+
 
 @Controller
 @RequestMapping(value = "/person/course/")
@@ -25,7 +27,9 @@ public class CourseController {
     @ResponseBody
     public Double getCourse() {
 
-        return courseRepository.GetCourse();
+        Double d = courseRepository.GetCourse();
+         return BigDecimal.valueOf(d).setScale(2, BigDecimal.ROUND_HALF_DOWN).doubleValue();
+  //             return courseRepository.GetCourse();
 
     }
 
